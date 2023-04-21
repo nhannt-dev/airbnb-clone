@@ -1,6 +1,7 @@
 import './globals.css'
-import { Navbar } from '../app/components'
+import { Navbar, ClientOnly, Register } from '../app/components'
 import { Nunito } from 'next/font/google'
+import { Toast } from './providers'
 
 export const metadata = {
   title: 'Airbnb Clone',
@@ -19,7 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <Navbar />
+        <ClientOnly>
+          <Toast />
+          <Register />
+          <Navbar />
+        </ClientOnly>
         {children}
       </body>
     </html>
