@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import icons from '../utils/icons'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import { useRegister, useLogin } from '../hooks'
@@ -38,6 +38,11 @@ const Login = () => {
         })
     }
 
+    const onToggle = useCallback(() => {
+        loginModal.onClose()
+        registerModal.onOpen()
+    }, [loginModal, registerModal])
+
     const bodyContent = (
         <div className='flex flex-col gap-4'>
             <Heading title='Welcome back' subtitle='Login to your account!' center />
@@ -53,8 +58,8 @@ const Login = () => {
             <Button outline label='Continue with Github' icon={AiFillGithub} onClick={() => signIn('github')} />
             <div className='text-neutral-500 text-center mt-4 font-light'>
                 <div className='justify-center flex flex-row items-center gap-2'>
-                    <div>Already have an account?</div>
-                    <div onClick={registerModal.onClose} className='text-neutral-800 cursor-pointer hover:underline'>Log in</div>
+                    <div>You don't have account?</div>
+                    <div onClick={onToggle} className='text-neutral-800 cursor-pointer hover:underline'>Sign up</div>
                 </div>
             </div>
         </div>

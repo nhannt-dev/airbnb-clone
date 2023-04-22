@@ -1,5 +1,5 @@
 import './globals.css'
-import { Navbar, ClientOnly, Register, Login } from '../app/components'
+import { Navbar, ClientOnly, Register, Login, Rent } from '../app/components'
 import { Nunito } from 'next/font/google'
 import { Toast } from './providers'
 import getCurrentUser from './actions/getCurrentUser'
@@ -24,6 +24,7 @@ export default async function RootLayout({
       <body className={font.className}>
         <ClientOnly>
           <Toast />
+          <Rent />
           <Login />
           <Register />
           <Navbar currentUser={currentUser} />

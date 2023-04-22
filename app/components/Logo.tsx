@@ -8,7 +8,7 @@ import { logo } from '../../public/images'
 const Logo = () => {
     const router = useRouter()
     return (
-        <Image height={100} width={100} src={logo} alt='nhannt' className='hidden md:block cursor-pointer' />
+        <Image onClick={() => router.push('/')} height={100} width={100} src={logo} alt='nhannt' className='hidden md:block cursor-pointer' />
     )
 }
 

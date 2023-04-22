@@ -4,7 +4,7 @@ import React, { useCallback, useState } from 'react'
 import axios from 'axios'
 import icons from '../utils/icons'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
-import { useRegister } from '../hooks'
+import { useRegister, useLogin } from '../hooks'
 import { Modal, Heading, Input, Button } from './'
 import { toast } from 'react-hot-toast'
 import { signIn } from 'next-auth/react'
@@ -13,6 +13,7 @@ const { AiFillGithub, FcGoogle } = icons
 
 const Register = () => {
     const registerModal = useRegister()
+    const loginModal = useLogin()
     const [isLoading, setIsLoading] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>({
         defaultValues: {
@@ -26,6 +27,11 @@ const Register = () => {
         setIsLoading(true)
         axios.post('/api/register', data).then(() => registerModal.onClose()).catch(() => toast.error('Something went wrong!')).finally(() => setIsLoading(false))
     }
+
+    const onToggle = useCallback(() => {
+        registerModal.onClose()
+        loginModal.onOpen()
+    }, [registerModal, loginModal])
 
     const bodyContent = (
         <div className='flex flex-col gap-4'>
@@ -44,7 +50,7 @@ const Register = () => {
             <div className='text-neutral-500 text-center mt-4 font-light'>
                 <div className='justify-center flex flex-row items-center gap-2'>
                     <div>Already have an account?</div>
-                    <div onClick={registerModal.onClose} className='text-neutral-800 cursor-pointer hover:underline'>Log in</div>
+                    <div onClick={onToggle} className='text-neutral-800 cursor-pointer hover:underline'>Sign in</div>
                 </div>
             </div>
         </div>
