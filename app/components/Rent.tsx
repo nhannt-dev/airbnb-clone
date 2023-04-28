@@ -1,10 +1,11 @@
 'use client'
 
 import React, { useMemo, useState } from 'react'
-import { Modal, Heading, CategoryInput } from '../components'
+import { Modal, Heading, CategoryInput, CountrySelect } from '../components'
 import { useRent } from '../hooks'
 import { categories } from '../utils/categories'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
+import dynamic from 'next/dynamic'
 
 enum STEPS {
     CATEGORY = 0,
@@ -34,8 +35,15 @@ const Rent = () => {
     })
 
     const category = watch('category')
+    const location = watch('location')
+    const guestCount = watch('guestCount')
+    const roomCount = watch('roomCount')
+    const bathroomCount = watch('bathroomCount')
+    const imageSrc = watch('imageSrc')
 
-    const setCustomValue = (id: string, value: string) => {
+const Map = useMemo(() => dynamic(() => import('./Map'), { ssr: false }), [location])
+
+    const setCustomValue = (id: string, value: any) => {
         setValue(id, value, {
             shouldDirty: true,
             shouldTouch: true,
@@ -72,8 +80,18 @@ const Rent = () => {
         </div>
     )
 
+    if (step === STEPS.LOCATION) {
+        bodyContent = (
+            <div className='flex flex-col gap-8'>
+                <Heading title='Where is your place located?' subtitle='Help guest find you!' />
+                <CountrySelect value={location} onChange={(value) => setCustomValue('location', value)} />
+                <Map center={location?.latlng}/>
+            </div>
+        )
+    }
+
     return (
-        <Modal isOpen={rentModal.isOpen} onClose={rentModal.onClose} onSubmit={rentModal.onClose} actionLabel={actionLabel} secondaryActionLabel={secondaryActionLabel} secondaryAction={step === STEPS.CATEGORY ? undefined : onBack} title='Airbnb your home!' body={bodyContent} />
+        <Modal isOpen={rentModal.isOpen} onClose={rentModal.onClose} onSubmit={onNext} actionLabel={actionLabel} secondaryActionLabel={secondaryActionLabel} secondaryAction={step === STEPS.CATEGORY ? undefined : onBack} title='Airbnb your home!' body={bodyContent} />
     )
 }
 
