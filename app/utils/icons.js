@@ -1,5 +1,5 @@
 import { BiSearch, BiDollar } from 'react-icons/bi'
-import { AiOutlineMenu, AiFillGithub, AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
+import { AiOutlineMenu, AiFillGithub, AiOutlineMinus, AiOutlinePlus, AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { IoMdClose } from 'react-icons/io'
 import { FcGoogle } from 'react-icons/fc'
 import { TbBeach, TbMountain, TbPool, TbPhotoPlus } from 'react-icons/tb'
@@ -14,7 +14,8 @@ const icons = {
     FcGoogle, TbBeach, TbMountain, TbPool, GiBarn,
     GiBoatFishing, GiCactus, GiCastle, GiCaveEntrance, GiForestCamp,
     GiIsland, GiWindmill, FaSkiing, BsSnow, IoDiamond,
-    MdOutlineVilla, AiOutlineMinus, AiOutlinePlus, TbPhotoPlus
+    MdOutlineVilla, AiOutlineMinus, AiOutlinePlus, TbPhotoPlus, AiOutlineHeart,
+    AiFillHeart
 }
 
 export default icons

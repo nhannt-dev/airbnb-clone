@@ -10,6 +10,7 @@ export async function POST (request: Request) {
     Object.keys(body).forEach((value: any) => {
         if (!body[value]) NextResponse.error()
     })
+    // 4:49:03 https://youtu.be/c_-b_isI4vg
     const listing = await prisma.listing.create({
         data: {
             title, 
