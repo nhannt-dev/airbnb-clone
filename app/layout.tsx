@@ -3,6 +3,7 @@ import { Navbar, ClientOnly, Register, Login, Rent } from '../app/components'
 import { Nunito } from 'next/font/google'
 import { Toast } from './providers'
 import { getCurrentUser } from './actions'
+
 export const metadata = {
   title: 'Airbnb Clone',
   description: 'Airbnb Clone next app',

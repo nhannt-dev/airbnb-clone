@@ -1,6 +1,7 @@
 import { ClientOnly, Container, EmptyState, ListingCard } from './components'
 import { getListings } from './actions'
 import { getCurrentUser } from './actions'
+
 export default async function Home() {
   const listings = await getListings()
   const currentUser = await getCurrentUser()
