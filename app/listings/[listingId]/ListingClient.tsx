@@ -2,8 +2,7 @@
 
 import axios from 'axios'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { SafeListing, SafeUser } from '../../types'
-import { Reservation } from '@prisma/client'
+import { SafeListing, SafeUser, SafeReservation } from '../../types'
 import { useLogin } from '../../hooks'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-hot-toast'
@@ -13,7 +12,7 @@ import { categories } from '@/app/utils/categories'
 import { Container, ListingHead, ListingInfo, ListingReservation } from '../../components'
 
 interface ListingClientProps {
-    reservations?: Reservation[]
+    reservations?: SafeReservation[]
     listing: SafeListing & {
         user: SafeUser
     }
@@ -78,7 +77,6 @@ const ListingClient: React.FC<ListingClientProps> = ({ listing, reservations = [
     const category = useMemo(() => {
         return categories.find((item) => item.label === listing.category)
     }, [listing.category])
-
     return (
         <Container>
             <div className='max-w-screen-lg mx-auto'>

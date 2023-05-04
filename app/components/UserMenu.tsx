@@ -8,6 +8,7 @@ import Avatar from './Avatar'
 import MenuItem from './MenuItem'
 import { useRegister, useLogin, useRent } from '../hooks'
 import { SafeUser } from '../types'
+import { useRouter } from 'next/navigation'
 
 const { AiOutlineMenu } = icons
 
@@ -16,6 +17,7 @@ interface UserMenuProps {
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
+  const router = useRouter()
   const registerModal = useRegister()
   const loginModal = useLogin()
   const rentModal = useRent()
@@ -44,7 +46,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           <div className='flex flex-col cursor-pointer'>
             {currentUser ? (
               <>
-                <MenuItem onClick={() => { }} label='My trips' />
+                <MenuItem onClick={() => router.push('/trips')} label='My trips' />
                 <MenuItem onClick={() => { }} label='My favorites' />
                 <MenuItem onClick={() => { }} label='My reservations' />
                 <MenuItem onClick={() => { }} label='My properties' />
