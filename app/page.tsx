@@ -1,15 +1,19 @@
 import { ClientOnly, Container, EmptyState, ListingCard } from './components'
 import { getListings } from './actions'
 import { getCurrentUser } from './actions'
+import { IListingsParams } from './actions/getListings'
 
-export default async function Home() {
-  const listings = await getListings()
+interface HomeProps {
+  searchParams: IListingsParams
+}
+const Home = async ({ searchParams }: HomeProps) => {
+  const listings = await getListings(searchParams)
   const currentUser = await getCurrentUser()
 
   if (listings.length === 0) {
     return (
       <ClientOnly>
-        <EmptyState showReset/>
+        <EmptyState showReset />
       </ClientOnly>
     )
   }
@@ -18,10 +22,12 @@ export default async function Home() {
       <Container>
         <div className='pt-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8'>
           {listings.map((listing: any) => (
-            <ListingCard currentUser={currentUser} key={listing.id} data={listing}/>
+            <ListingCard currentUser={currentUser} key={listing.id} data={listing} />
           ))}
         </div>
       </Container>
     </ClientOnly>
   )
 }
+
+export default Home
